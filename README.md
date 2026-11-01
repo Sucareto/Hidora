@@ -80,7 +80,7 @@ Hidora 让已 root 的 Android 设备使用 Linux USB Gadget 功能，模拟成�
 - [USB Gadget Tool](https://github.com/tejado/android-usb-gadget)：参考了 HID gadget 设备配置
 - [android-hid-client](https://github.com/Arian04/android-hid-client)：参考了设备配置方式
 - [Soarer's Converter](https://geekhack.org/index.php?topic=17458.0)：Boot 键盘与 NKRO 双接口的思路来源
-- [MS-GIPUSB](https://learn.microsoft.com/openspecs/windows_protocols/ms-gipusb/)：微软公开的 Xbox 手柄 USB 协议规范，XInput 模式据此实现
+- [Gaming Input Protocol (GIP)](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gipusb/e7c90904-5e21-426e-b9ad-d82adeee0dbc)：GIP 协议参考
 - [pid.codes](https://pid.codes/)：借用了 USB VID / PID
 - [Claude Code](https://claude.ai)：方案探索与代码编写
 - [ReoNa「Amore」](https://www.youtube.com/watch?v=6C3zYwUmMKE)：开发时听的音乐
