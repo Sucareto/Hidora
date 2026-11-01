@@ -1,0 +1,22 @@
+name: hidora
+
+services:
+  apk:
+    build: docker
+    image: hidora-builder
+    network_mode: bridge
+    volumes:
+      - .:/src:ro
+      - ./output:/output
+      - gradle:/root/.gradle
+      - keys:/keys
+    environment:
+      - APP_NAME=Hidora
+      - KEYSTORE_PASSWORD
+      - KEY_PASSWORD
+
+volumes:
+  gradle:
+    name: hidora-gradle
+  keys:
+    name: hidora-keys

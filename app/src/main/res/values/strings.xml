@@ -1,0 +1,114 @@
+<resources>
+    <string name="app_name">Hidora</string>
+
+    <string name="status_preview_label">Preview mode</string>
+    <string name="status_open_error">Cannot open the device. Stop it and enter again</string>
+
+    <string name="device_row_keyboard_mouse">Keyboard &amp; Mouse</string>
+    <string name="device_row_gamepad">Gamepad</string>
+
+    <string name="action_enter">Enter</string>
+
+    <string name="result_success">%1$s succeeded</string>
+    <string name="result_failure">%1$s failed: %2$s</string>
+    <string name="result_udc_not_restored">%1$s succeeded, but USB could not be returned to the system. You may need to replug the cable</string>
+    <string name="error_device_exhausted">The system has run out of HID device numbers. This app only manages the gadgets it created and never deletes others. Clean up unused gadgets in the usb_gadget directory of ConfigFS to free hidg numbers, then try again</string>
+    <string name="error_slot_unavailable">The kernel\'s USB gadget records are out of sync, usually after another tool removed a gadget. Restart the phone and try again</string>
+    <string name="error_unknown">Unknown error</string>
+
+    <string name="mouse_button_left">Left</string>
+    <string name="mouse_button_middle">Middle</string>
+    <string name="mouse_button_right">Right</string>
+    <string name="mouse_swap_hand">Swap sides</string>
+    <string name="mouse_switch_keyboard">Keyboard</string>
+    <string name="mouse_speed_low">Speed: Low</string>
+    <string name="mouse_speed_mid">Speed: Medium</string>
+    <string name="mouse_speed_high">Speed: High</string>
+
+    <string name="fn_label_mouse">Mouse</string>
+    <string name="fn_label_ctrl_alt_del" translatable="false">C-A-Del</string>
+
+    <string name="action_stop">Stop</string>
+    <string name="state_running">Running</string>
+    <string name="state_idle">Not running</string>
+    <string name="state_stopped_leftover">Stopped</string>
+    <string name="status_descriptor_rejected">This phone\'s kernel does not support Xbox 360 compatibility mode. It has been turned off; enter again to use XInput</string>
+    <string name="nav_back">Back</string>
+    <string name="settings_app_title">Settings</string>
+    <string name="settings_profile_title">%1$s settings</string>
+    <string name="settings_stop_on_leave">Stop device when leaving its view</string>
+    <string name="settings_stop_on_leave_summary">When off, the device stays connected in the background</string>
+    <string name="settings_km_start_page">Default view</string>
+    <string name="settings_key_haptics">Haptic feedback on keys</string>
+    <string name="settings_section_usb">USB device</string>
+    <string name="settings_device_name">Device name</string>
+    <string name="settings_vendor_id">Vendor ID (VID)</string>
+    <string name="settings_product_id">Product ID (PID)</string>
+    <string name="settings_vid_pid_warning">The default VID/PIDs are pid.codes test IDs (1209:0001–0010) for private testing only. For any other use, change them to a VID/PID you are entitled to use. Another vendor\'s IDs may make the host load the wrong driver</string>
+    <string name="settings_gamepad_layout">Stick layout</string>
+    <string name="settings_gamepad_layout_offset">Offset (Xbox)</string>
+    <string name="settings_gamepad_layout_symmetric">Symmetric (PlayStation)</string>
+    <string name="settings_gamepad_labels">Button labels</string>
+    <string name="settings_gamepad_labels_summary">Each button sends the input its label shows. The host always sees an Xbox-style controller</string>
+    <string name="settings_gamepad_mode">Protocol</string>
+    <string name="settings_gamepad_xbox360">Xbox 360 compatibility mode</string>
+    <string name="settings_gamepad_xbox360_unsupported">Not supported by this phone\'s kernel (needs a 4.x kernel)</string>
+    <string name="settings_gamepad_xbox360_summary">For older Windows. Only works on old phone kernels (4.x); no Share button or trigger rumble</string>
+    <string name="settings_gamepad_mode_summary">XInput: Xbox controller on Windows 10/11. DirectInput: generic HID gamepad</string>
+    <string name="status_preview_mode">Root not authorized, preview mode: you can try the controls, but no USB device is created and nothing is sent</string>
+    <string name="settings_mouse_speed">Default mouse speed</string>
+    <string name="settings_speed_low">Low</string>
+    <string name="settings_speed_mid">Medium</string>
+    <string name="settings_speed_high">High</string>
+    <string name="settings_mouse_buttons_side">Mouse buttons position</string>
+    <string name="settings_side_left">Left</string>
+    <string name="settings_side_right">Right</string>
+    <string name="settings_mouse_defaults_summary">Changes made inside the mouse view are not saved</string>
+    <string name="settings_gamepad_swap_shoulders">Swap bumpers and triggers</string>
+    <string name="settings_gamepad_swap_shoulders_summary">Triggers on the outside, bumpers on the inside</string>
+    <string name="settings_gamepad_rumble">Controller rumble</string>
+    <string name="settings_gamepad_rumble_summary">Vibrate the phone when a game rumbles the controller (XInput only)</string>
+    <string name="settings_gamepad_triggers">Triggers</string>
+    <string name="settings_gamepad_triggers_linear">Linear</string>
+    <string name="settings_gamepad_triggers_hair">Hair trigger</string>
+    <string name="settings_gamepad_triggers_summary">Hair trigger: any touch is a full pull</string>
+    <string name="settings_rebuild_hint">This device is active. USB changes apply after you stop it and enter again</string>
+    <string name="settings_environment">Environment check</string>
+    <string name="settings_environment_summary">Check root, kernel and USB support on this phone</string>
+    <string name="env_recheck">Check again</string>
+    <string name="env_copy">Copy results</string>
+    <string name="env_status_ok">OK</string>
+    <string name="env_status_warn">Note</string>
+    <string name="env_status_fail">Problem</string>
+    <string name="env_status_info">Info</string>
+    <string name="env_unknown">Unknown item</string>
+    <string name="env_device">Phone</string>
+    <string name="env_root_access">Root access</string>
+    <string name="env_root_solution">Root solution</string>
+    <string name="env_configfs">ConfigFS USB gadget</string>
+    <string name="env_udc">USB device controller (UDC)</string>
+    <string name="env_hid_function">HID function</string>
+    <string name="env_functionfs">FunctionFS</string>
+    <string name="env_slot">App gadget</string>
+    <string name="env_system_gadgets">System gadgets</string>
+    <string name="env_kernel">Kernel</string>
+    <string name="env_root_access_fail">Not granted. Only preview mode is available</string>
+    <string name="env_root_access_warn">Granted, but the root service did not respond</string>
+    <string name="env_root_solution_warn">Only tested with Magisk so far</string>
+    <string name="env_configfs_fail">Not found. The kernel does not support USB gadget ConfigFS</string>
+    <string name="env_udc_fail">No USB device controller found</string>
+    <string name="env_hid_function_fail">Not enabled in the kernel. HID devices cannot be created</string>
+    <string name="env_hid_function_info">Cannot tell from the kernel config</string>
+    <string name="env_functionfs_warn">Not supported. XInput is unavailable</string>
+    <string name="env_slot_warn">Contains unrecognized functions. Entering any device clears it</string>
+    <string name="env_kernel_info">Xbox 360 compatibility mode needs a 4.x kernel</string>
+    <string name="settings_advanced">Advanced</string>
+    <string name="settings_advanced_summary">USB device name and VID/PID of each device</string>
+    <string name="settings_reset_default">Reset to default</string>
+    <string name="settings_vid_pid_duplicate">Same VID/PID as another device. The host may mix up their drivers and settings</string>
+    <string name="usb_identity_dinput">DirectInput</string>
+    <string name="usb_identity_gip">XInput</string>
+    <string name="usb_identity_xusb">Xbox 360 compatibility mode</string>
+    <string name="settings_identity_active">%1$s (in use)</string>
+    <string name="usb_identity_ffs_note">Windows picks the driver from the USB descriptors, not the VID/PID. After changing the VID/PID, Windows sets it up as a new device</string>
+</resources>

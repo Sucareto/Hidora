@@ -1,0 +1,84 @@
+name: Build
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: gradle/actions/wrapper-validation@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+
+      - name: Check tag matches versionName
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          version=$(sed -n 's/^ *versionName = "\(.*\)"/\1/p' app/build.gradle.kts)
+          [ "v$version" = "$GITHUB_REF_NAME" ] || { echo "::error::Tag $GITHUB_REF_NAME does not match versionName $version"; exit 1; }
+
+      - name: Prepare signing key
+        env:
+          KEYSTORE_BASE64: ${{ secrets.SIGNING_KEYSTORE_BASE64 }}
+          KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ] && [ -n "$KEY_ALIAS" ]; then
+            printf '%s' "$KEYSTORE_BASE64" | base64 -d > release.jks
+          elif [ "${GITHUB_REF#refs/tags/}" != "$GITHUB_REF" ]; then
+            echo "::error::Signing secrets are required for tag builds"
+            exit 1
+          else
+            echo "::notice::Signing secrets not set, the APK is signed with a throwaway test key"
+          fi
+
+      - name: Build
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD || secrets.SIGNING_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+        run: |
+          set -- --lint
+          [ -f release.jks ] && set -- "$@" --keystore release.jks --alias "$KEY_ALIAS"
+          docker compose run --rm -T --build apk "$@"
+
+      - name: Remove signing key
+        if: always()
+        run: rm -f release.jks
+
+      - name: Name outputs
+        id: name
+        run: |
+          name=$(sed -n 's/^rootProject.name = "\(.*\)"/\1/p' settings.gradle.kts)
+          version=$(sed -n 's/^ *versionName = "\(.*\)"/\1/p' app/build.gradle.kts)
+          case "$GITHUB_REF" in
+            refs/tags/*) apk="$name-$version.apk" ;;
+            *) apk="$name-$version-${GITHUB_SHA::7}.apk" ;;
+          esac
+          mapping="${apk%.apk}-mapping.txt.gz"
+          mv output/app-release.apk "output/$apk"
+          gzip -9c output/mapping.txt > "output/$mapping"
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "apk=$apk" >> "$GITHUB_OUTPUT"
+          echo "mapping=$mapping" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ${{ steps.name.outputs.name }}
+          path: |
+            output/${{ steps.name.outputs.apk }}
+            output/${{ steps.name.outputs.mapping }}
+            output/lint-results-release.txt
+          if-no-files-found: error
+

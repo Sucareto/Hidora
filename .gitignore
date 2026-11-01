@@ -1,0 +1,11 @@
+build/
+.gradle/
+.kotlin/
+.idea/
+.vscode/
+local.properties
+/output/
+*.jks
+*.keystore
+*.apk
+/CLAUDE.md
